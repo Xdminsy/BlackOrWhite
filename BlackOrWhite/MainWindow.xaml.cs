@@ -120,6 +120,10 @@ namespace BlackOrWhite
                     animation.To = new Thickness(j * cellWidth, i * cellHeight, 0, 0);
                     animation.Duration = TimeSpan.FromSeconds(0.2);
                     animation.Completed += (s, ev) => cell.Margin = new Thickness(j * cellWidth, (i + 1) * cellHeight, 0, 0);
+                    if (i == 4)
+                    {
+                        animation.Completed += (s, ev) => Playground.Children.Remove(cell);
+                    }
                     cell.BeginAnimation(Grid.MarginProperty, animation);
                 }
             }
