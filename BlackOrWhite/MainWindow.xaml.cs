@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
+using System.IO;
 
 namespace BlackOrWhite
 {
@@ -81,13 +82,14 @@ namespace BlackOrWhite
                 ColorAnimation a = new ColorAnimation();
                 a.From = Colors.White;
                 a.To = Colors.Red;
-                a.Duration = TimeSpan.FromSeconds(0.15);
+                a.Duration = TimeSpan.FromSeconds(0.2);
                 a.RepeatBehavior = new RepeatBehavior(3);
+                a.Completed += (s, ev) => {
+                    End.Visibility = System.Windows.Visibility.Visible;
+                    EndScore.Content = score;
+                };
                 c.Background.BeginAnimation(SolidColorBrush.ColorProperty, a);
-                MouseDown -= mouseDown;
-                End.Visibility = System.Windows.Visibility.Visible;
-                EndScore.Content = score;
-                InitializePlayground();
+                Playground.IsEnabled = false;
                 return;
             }
             else if (color == Colors.Black)
@@ -143,11 +145,26 @@ namespace BlackOrWhite
             }
         }
 
+        private void newGame()
+        {
+            End.Visibility = System.Windows.Visibility.Hidden;
+            Playground.IsEnabled = true;
+            InitializePlayground();
+        }
 
         private void NewGame_Click(object sender, RoutedEventArgs e)
         {
-            End.Visibility = System.Windows.Visibility.Hidden;
-            InitializePlayground();
+            newGame();
         }
+
+
+        private void win_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                newGame();
+            }
+        }
+
     }
 }

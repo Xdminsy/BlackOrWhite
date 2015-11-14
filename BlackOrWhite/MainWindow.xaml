@@ -1,13 +1,17 @@
 ﻿<Window x:Name="win" x:Class="BlackOrWhite.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Loaded="WinLoaded" Background="#FF9062D3" Width="420" Height="640">
-    <Grid x:Name="Playground" Width="400" Loaded="PlaygroundLoaded"  Height="600">
-        <Grid x:Name="End" Panel.ZIndex="3" Visibility="Hidden" Background="White">
-            <Label x:Name="Evaluation" Content="You lose!" FontSize="80" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,400"></Label>
-            <Label x:Name="EndScore" Content="0" FontSize="120" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0"></Label>
-            <Button x:Name="NewGame" Content="New Game" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" Margin="0,200,0,0" Click="NewGame_Click"></Button>
+        Title="Black or white" Loaded="WinLoaded" Background="#FF9062D3" Width="420" Height="640" KeyDown="win_KeyDown">
+    <Grid>
+        <Grid x:Name="End" Panel.ZIndex="3" Visibility="Hidden">
+            <Grid.Background>
+                <ImageBrush Stretch="UniformToFill" ImageSource="/Images/bg.png" TileMode="Tile"/>
+            </Grid.Background>
+            <Button x:Name="NewGame" Content="Press space" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" Margin="83,526,86,20" Click="NewGame_Click" Background="{x:Null}" BorderThickness="0" BorderBrush="{x:Null}" Height="64" Width="243" Opacity="0.5"/>
+            <Label x:Name="EndScore" FontSize="140" Content="0" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" HorizontalContentAlignment="Center" Opacity="0.75"/>
         </Grid>
-        <Label x:Name="Score" Content="0" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" FontSize="120" Panel.ZIndex="1" Foreground="#FF228581"/>
+        <Grid x:Name="Playground" Width="400" Loaded="PlaygroundLoaded"  Height="600">
+            <Label x:Name="Score" Content="0" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" FontSize="120" Panel.ZIndex="1" Foreground="#FF228581"/>
+        </Grid>
     </Grid>
 </Window>
